@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VotingClosedPayload",
+  "type": "object",
+  "required": ["voting_round_id", "round_number", "reason"],
+  "properties": {
+    "voting_round_id": { "type": "string" },
+    "round_number": { "type": "integer", "minimum": 1 },
+    "reason": {
+      "type": "string",
+      "enum": ["ALL_VOTED", "DEADLINE", "ENGINE_REQUEST"]
+    }
+  },
+  "additionalProperties": false
+}
+

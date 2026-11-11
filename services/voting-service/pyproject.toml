@@ -1,0 +1,91 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mafia-voting-service"
+version = "0.1.0"
+description = "Voting and Elimination Service for real-time multiplayer Mafia game"
+authors = [{ name = "Mafia Game Team" }]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.111.0",
+    "uvicorn[standard]>=0.30.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.0",
+    "sqlalchemy>=2.0.30",
+    "asyncpg>=0.29.0",
+    "alembic>=1.13.0",
+    "redis>=5.0.4",
+    "aio-pika>=9.4.1",
+    "pyjwt[crypto]>=2.8.0",
+    "python-json-logger>=2.0.7",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["migrations"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM", "TID"]
+ignore = ["B008", "N818"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.12"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+plugins = []
+
+[[tool.mypy.overrides]]
+module = "app.core.*"
+strict = true
+
+[[tool.mypy.overrides]]
+module = [
+    "testcontainers.*",
+    "asyncpg.*",
+    "aio_pika.*",
+    "pythonjsonlogger.*"
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+asyncio_mode = "auto"
+testpaths = ["tests"]
+pythonpath = ["."]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["app"]
+branch = true
+omit = [
+    "tests/*",
+    "migrations/*",
+]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]

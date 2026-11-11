@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OpenVotingRequest",
+  "type": "object",
+  "required": [
+    "round_number",
+    "voting_round_id",
+    "eligible_voters",
+    "eligible_targets",
+    "deadline",
+    "tie_rule",
+    "allow_vote_change",
+    "reveal_ballots_after_close"
+  ],
+  "properties": {
+    "round_number": { "type": "integer", "minimum": 1 },
+    "voting_round_id": { "type": "string" },
+    "eligible_voters": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "eligible_targets": {
+      "type": "array",
+      "items": { "type": "string" },
+      "minItems": 1
+    },
+    "deadline": { "type": "string", "format": "date-time" },
+    "tie_rule": {
+      "type": "string",
+      "enum": ["NO_ELIMINATION", "REVOTE_AMONG_TIED"]
+    },
+    "allow_vote_change": { "type": "boolean" },
+    "reveal_ballots_after_close": { "type": "boolean" }
+  },
+  "additionalProperties": false
+}
+

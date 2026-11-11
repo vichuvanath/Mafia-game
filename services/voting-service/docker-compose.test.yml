@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  voting-postgres:
+    image: postgres:16-alpine
+    container_name: voting_test_postgres
+    environment:
+      POSTGRES_USER: voting_user
+      POSTGRES_PASSWORD: voting_password
+      POSTGRES_DB: voting_db
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U voting_user -d voting_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  voting-redis:
+    image: redis:7-alpine
+    container_name: voting_test_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  voting-rabbitmq:
+    image: rabbitmq:3.13-management-alpine
+    container_name: voting_test_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    healthcheck:
+      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+

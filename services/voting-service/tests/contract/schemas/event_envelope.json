@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "EventEnvelope",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "payload": { "type": "object" }
+  },
+  "additionalProperties": false
+}
+

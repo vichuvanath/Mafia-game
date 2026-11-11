@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VoteResultReadyPayload",
+  "type": "object",
+  "required": [
+    "voting_round_id",
+    "round_number",
+    "outcome",
+    "target_id",
+    "tied_player_ids",
+    "tally",
+    "abstentions"
+  ],
+  "properties": {
+    "voting_round_id": { "type": "string" },
+    "round_number": { "type": "integer", "minimum": 1 },
+    "outcome": {
+      "type": "string",
+      "enum": ["ELIMINATE", "TIE", "NO_ELIMINATION"]
+    },
+    "target_id": {
+      "type": ["string", "null"]
+    },
+    "tied_player_ids": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tally": {
+      "type": "object",
+      "additionalProperties": { "type": "integer", "minimum": 0 }
+    },
+    "abstentions": { "type": "integer", "minimum": 0 }
+  },
+  "additionalProperties": false
+}
+
