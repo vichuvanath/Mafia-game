@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlayerEliminationConfirmedEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "PLAYER_ELIMINATION_CONFIRMED" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["player_id", "round_number"],
+      "properties": {
+        "player_id": { "type": "string" },
+        "round_number": { "type": "integer", "minimum": 1 },
+        "revealed_role": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

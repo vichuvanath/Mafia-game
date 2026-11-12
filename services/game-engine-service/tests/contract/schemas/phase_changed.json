@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PhaseChangedEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "PHASE_CHANGED" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["game_id", "previous_phase", "new_phase", "round_number"],
+      "properties": {
+        "game_id": { "type": "string" },
+        "previous_phase": { "type": "string" },
+        "new_phase": { "type": "string" },
+        "round_number": { "type": "integer", "minimum": 1 },
+        "deadline": { "type": ["string", "null"] }
+      }
+    }
+  }
+}

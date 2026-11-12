@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameStartedEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "GAME_STARTED" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["game_id", "room_id", "player_count", "round_number"],
+      "properties": {
+        "game_id": { "type": "string" },
+        "room_id": { "type": "string" },
+        "player_count": { "type": "integer", "minimum": 3 },
+        "round_number": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "GameOverEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "GAME_OVER" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["winner", "round_number"],
+      "properties": {
+        "winner": { "type": "string", "enum": ["MAFIA", "VILLAGERS"] },
+        "round_number": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RoleAssignmentCompletedEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "ROLE_ASSIGNMENT_COMPLETED" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer" },
+    "payload": {
+      "type": "object",
+      "required": ["assignments"],
+      "properties": {
+        "assignments": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "enum": ["MAFIA", "DOCTOR", "VILLAGER"] }
+        }
+      }
+    }
+  }
+}

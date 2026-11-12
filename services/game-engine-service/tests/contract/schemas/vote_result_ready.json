@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "VoteResultReadyEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "VOTE_RESULT_READY" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer" },
+    "payload": {
+      "type": "object",
+      "required": ["round_number", "votes", "is_tie"],
+      "properties": {
+        "round_number": { "type": "integer", "minimum": 1 },
+        "eliminated_player_id": { "type": ["string", "null"] },
+        "votes": {
+          "type": "object",
+          "additionalProperties": { "type": ["string", "null"] }
+        },
+        "is_tie": { "type": "boolean" },
+        "tied_player_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    }
+  }
+}

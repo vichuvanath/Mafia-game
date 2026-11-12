@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PlayerDisconnectedEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "PLAYER_DISCONNECTED" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer" },
+    "payload": {
+      "type": "object",
+      "required": ["player_id"],
+      "properties": {
+        "player_id": { "type": "string" },
+        "disconnected_at": { "type": "string" }
+      }
+    }
+  }
+}

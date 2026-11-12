@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "NightResolvedEvent",
+  "type": "object",
+  "required": ["event_id", "event_type", "occurred_at", "game_id", "version", "payload"],
+  "properties": {
+    "event_id": { "type": "string" },
+    "event_type": { "type": "string", "const": "NIGHT_RESOLVED" },
+    "occurred_at": { "type": "string", "format": "date-time" },
+    "game_id": { "type": "string" },
+    "version": { "type": "integer", "minimum": 1 },
+    "payload": {
+      "type": "object",
+      "required": ["someone_died", "message"],
+      "properties": {
+        "someone_died": { "type": "boolean" },
+        "killed_player_id": { "type": ["string", "null"] },
+        "message": { "type": "string" }
+      }
+    }
+  }
+}
